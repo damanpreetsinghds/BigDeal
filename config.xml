@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id = "com.kryptosmobile.bigDeal" version   = "1.0.0">
-        <name>BigDeals</name>
-        <description>BigDeals</description>
+        id = "com.deal.monk" version   = "1.0.0">
+        <name>DealMonk</name>
+        <description>DealMonk</description>
         <author href="http://kryptosmobile.com" email="info@kryptosmobile.com">Kryptos Mobile Team</author>
         <feature name="http://api.phonegap.com/1.0/device" />
         
@@ -93,16 +93,28 @@
         <gap:plugin name="com.hutchind.cordova.plugins.launcher"/>
         <gap:plugin name="ch.ti8m.documenthandler"/>
         <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-        <!--<gap:plugin name="com.parse.cordova.core.pushplugin" version="0.1.0" />-->
+        <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+        <gap:plugin name="com.parse.cordova.core.pushplugin" version="0.1.0" />
+        <gap:plugin name="org.apache.cordova.camera" spec="0.3.6" source="pgb" />
+        <gap:plugin name="cordova-plugin-actionsheet" source="npm" />
+
+        <plugin spec="https://github.com/kryptosmobile/PaytmPhonegapPlugin.git" source="git" >
+            <param name="GENERATE_URL" value="https://kryptosda.kryptosmobile.com/kryptosds/paytm/generatechecksum" />
+            <param name="VERIFY_URL" value="https://kryptosda.kryptosmobile.com/kryptosds/paytm/verifychecksum" />
+            <param name="MERCHANT_ID" value="Krypto91814698215161" />
+            <param name="INDUSTRY_TYPE_ID" value="Retail" />
+            <param name="WEBSITE" value="Kryptoswap" />
+        </plugin>
         <!--<gap:plugin name="de.appplant.cordova.plugin.local-notification" />-->
-        <!--<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
-                <param name="APP_ID" value="1700896896860137" />
-                <param name="APP_NAME" value="IIIT-D" />
+        <!--<gap:plugin name="com.medlei.pushplugin" version="0.1.2" >
+            <param name="APP_ID" value="tm6167dNDqCXavTDGxrJlbQq08Q6gXDvE7i6iXFA" />
+            <param name="CLIENT_KEY" value="urpcLTRtFuRrNBdAeL3yZOkOXqrQmh1y7JRzY8PM" />
         </gap:plugin>-->
-        <gap:plugin name="com.medlei.pushplugin" version="0.1.2" >
-            <param name="APP_ID" value="udWc9VsVYwr01VKDqAPb0oTksvSHvvZH2YvdK87P" />
-            <param name="CLIENT_KEY" value="rAPM1kCLapl2ekiSXNOvORNACuEi6ZUyU4Np9CjI" />
+        <gap:plugin name="com.phonegap.plugins.facebookconnect">
+            <param name="APP_ID" value="527129877487378" />
+            <param name="APP_NAME" value="DealMonk" />
         </gap:plugin>
+
         <gap:config-file platform="ios" parent="UIStatusBarHidden" overwrite="true">
             <true/>
         </gap:config-file>
