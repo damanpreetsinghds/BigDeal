@@ -67,6 +67,8 @@ var onDeviceReady = function() {
     }
     window.handleOrientation = handleOrientation;
     window.addEventListener('orientationchange', handleOrientation, false);
+    StatusBar.backgroundColorByHexString("#000");
+    
 }
 
 document.addEventListener('deviceready',onDeviceReady, false);
@@ -164,7 +166,7 @@ var MyCampusApp = {
                         $location.path("/home");
                         });
                     }
-                },4000);
+                },100);
             }).error(function(data){
                 });
         }
@@ -201,6 +203,14 @@ var MyCampusApp = {
                                                                     });
 			}
 		}
+
+        setTimeout(function() {
+            try {
+                navigator.splashscreen.hide();
+            }catch(ex) {
+                
+            }
+        }, 2000);
         //Store update bug fix end (Nick)
 
         if(storedMetadata) {
@@ -254,58 +264,8 @@ var MyCampusApp = {
             });
             $rootScope.appgroups = appgroups;
             
-            var UP = $.jStorage.get("UserProfile");
-
-            if (UP) {
-                $rootScope.profileSynced = true;
-                $rootScope.userProfileName = UP.username;
-                $rootScope.useremail = UP.email;
-                $rootScope.userProfilePic =UP.img;
-            } else {
-                //$rootScope.userProfile = "";
-                $rootScope.profileSynced = false;
-            }
-            try{
-                var data={tenant:'IIITD',max:20,offset:0};
-                $.jStorage.set("pushOldCounts",0);
-                var xhr=$.ajax({
-                               url:"https://kryptos.kryptosmobile.com/gateway/CEAI/kryptospushlog",
-                               contentType:'application/json',
-                               type:"POST",
-                               headers: { 'licenseKey': 'UjpIaWVDVzpTOjE0NDk0ODk2MzUxMzE6VTpha0BjYW1wdXNlYWkub3JnOlQ6NDpQOjI4Ng==' },
-                               data:JSON.stringify(data),
-                               success:function(data){
-                               
-                               $rootScope.pushCounts=data.paging.total;
-                               $rootScope.pushData=data;
-                               
-                               var oldCounts=$.jStorage.get("pushOldCounts");
-                               
-                               if(oldCounts == null || oldCounts == undefined){
-                               //var oldCounts = $rootScope.pushCounts;
-                               $rootScope.NewPush=$rootScope.pushCounts;
-                               //$.jStorage.set("pushOldCounts",$rootScope.pushCounts);
-                               }
-                               else{
-                               var oldCounts=$.jStorage.get("pushOldCounts");
-                               $rootScope.NewPush=$rootScope.pushCounts-oldCounts;
-                               //$.jStorage.set("pushOldCounts",$rootScope.pushCounts);
-                               }
-
-                               if($rootScope.NewPush <= 0){
-                               $rootScope.ShowPushCounts=false;
-                               }else{
-                               $rootScope.ShowPushCounts=true;
-                               }
-                               //alert($rootScope.NewPush);
-                               $rootScope.notificationCounts=$rootScope.NewPush;
-                               },
-                               error:function(err){
-                               }
-                               });
-            }catch(e){
-                alert(e)
-            }
+            
+            
             
             
             $rootScope.appDisplayName = storedMetadata.appDisplayName;
@@ -406,13 +366,13 @@ var MyCampusApp = {
     },
 
     deviceReadyHandler : function() {
-        document.addEventListener("backbutton", MyCampusApp.backButtonHandler, true);
+        //document.addEventListener("backbutton", MyCampusApp.backButtonHandler, true);
         document.addEventListener('pause', MyCampusApp.pauseHandler, false);
         document.addEventListener('resume', MyCampusApp.resumeHandler, false);
         document.addEventListener('online', MyCampusApp.onlineHandler, false);
         document.addEventListener('offline', MyCampusApp.offlineHandler, false);
     },
-    backButtonHandler: function() {
+    /*backButtonHandler: function() {
         $.unblockUI();
         if(MyCampusApp.homeScreenDisplayed) {
             var onConfirm = function(buttonIndex) {
@@ -438,7 +398,7 @@ var MyCampusApp = {
         }else {
             navigator.app.backHistory();
         }
-    },
+    },*/
 
     pauseHandler: function(){
 

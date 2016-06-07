@@ -269,7 +269,7 @@ angular.module('myApp.controllers', []).
                     $route.reload();
                     $rootScope.$apply(function () {
                         //$location.path("/home");
-                        $location.path("/app/FoodDeals/FoodDeals");
+                        //$location.path("/app/FoodDeals/FoodDeals");
                     });
                 });
                 $rootScope.homeDownloadCompleteAdded = true;
@@ -479,6 +479,17 @@ angular.module('myApp.controllers', []).
     .controller('AppCtrl', ['$scope', '$routeParams', '$compile', '$http', '$rootScope', '$sce', '$window',
         '$location',
         function ($scope, $routeParams, $compile, $http, $rootScope, $sce, $window, $location) {
+            $rootScope.myswiperight = function() {    
+                if (!$("body").hasClass("sidebar-left-in")) {
+                    $rootScope.toggle("mainSidebar");
+                }
+
+            }
+            $rootScope.myswipeleft = function() {
+                if ($("body").hasClass("sidebar-left-in")) {
+                    $rootScope.toggle("mainSidebar");
+                }
+            }  
             MyCampusApp.homeScreenDisplayed = false;
             $scope.appname = $routeParams.appid;
             $scope.pageid = $routeParams.pageid;
